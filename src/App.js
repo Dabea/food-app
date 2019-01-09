@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import FoodItem from './componets/FoodItem'
 import './App.css';
 
+
 class App extends Component {
+  state = {
+    totalCalories: 0
+  }
+
+  handleChange(test)  {
+    console.log(test);
+  }
+
   render() {
+    const foodList =  [{"food": "Chicken brest", "calories": 250  }, {"food": "Bacon Thick Cut", "calories": 56  } ,{"food": "Lettus Heart", "calories": 5  }];
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {foodList.map(food => <FoodItem food={food.food} calories={food.calories} testProp={() => this.handleChange}/> )}
+        <div> TEST VALUE = {this.state.totalCalories} </div>
       </div>
     );
   }
