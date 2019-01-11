@@ -8,8 +8,8 @@ class FoodItem extends React.Component{
             totalCalories: 0,
             active: false
         }
-        handleChange(event) {
-            this.setState({ [event.target.name]: event.target.value });
+        handleChange = (event) => {
+            this.setState({ [event.target.name]: event.target.value }, () => this.updateTotalCalories() );
           }
 
          componentDidMount(){
@@ -33,7 +33,7 @@ class FoodItem extends React.Component{
                 <input onClick={() => this.sendTotalCalories() } type="checkbox" />
                 <label> { this.props.food } </label>
                 <label> {this.props.calories} </label>
-                <label> Quanity <input name="quanity"  value={this.state.quanity} />  </label>
+                <label> Quanity <input name="quanity" onChange={  this.handleChange}  value={this.state.quanity} />  </label>
                 <label> People <input name="peopleShareing"  value={this.state.peopleShareing} />  </label>
                 <label> Total: {this.state.totalCalories} </label>
             </div>
