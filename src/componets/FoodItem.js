@@ -17,7 +17,15 @@ class FoodItem extends React.Component{
          }
 
          updateTotalCalories(){
-            this.setState((state) => ({ totalCalories: (this.props.calories * this.state.quanity)/ this.state.peopleShareing}));
+            this.setState((state) => ({ totalCalories: Math.round((this.props.calories * this.state.quanity)/ this.state.peopleShareing)}));
+         }
+
+         increaseValue = (value) => {
+            this.setState({ [value]: this.state[value] + 1}, () =>  this.updateTotalCalories() )
+         }
+
+         decreaseValue = (value) => {
+            this.setState({ [value]: this.state[value] - 1}, () => this.updateTotalCalories() )
          }
 
          sendTotalCalories = () => {
@@ -33,8 +41,16 @@ class FoodItem extends React.Component{
                 <input onClick={() => this.sendTotalCalories() } type="checkbox" />
                 <label> { this.props.food } </label>
                 <label> {this.props.calories} </label>
-                <label> Quanity <input name="quanity" onChange={  this.handleChange}  value={this.state.quanity} />  </label>
-                <label> People <input name="peopleShareing"  value={this.state.peopleShareing} />  </label>
+                <span> Quanity 
+                    <button class="subBtn" onClick={() =>  this.state.quanity > 0 ? this.decreaseValue("quanity") :false } > - </button>
+                     <input size="2" name="quanity" onChange={ this.handleChange}  value={this.state.quanity} />   
+                     <button class="addBtn" onClick={() => this.increaseValue("quanity")} > + </button>  
+                </span>
+                <span> People  
+                    <button class="subBtn" onClick={() => this.state.peopleShareing > 1 ?  this.decreaseValue("peopleShareing"): false } > - </button> 
+                    <input size="2" name="peopleShareing"  onChange={ this.handleChange} value={this.state.peopleShareing} />  
+                    <button class="addbtn" onClick={() => this.increaseValue("peopleShareing")}  > + </button>  
+                </span>
                 <label> Total: {this.state.totalCalories} </label>
             </div>
         );
