@@ -5,7 +5,8 @@ import './App.css';
 
 class App extends Component {
   state = {
-    totalCalories: 0
+    totalCalories: 0,
+    activeFoodList: [{"food": "Chicken brest", "calories": 250  }, {"food": "Bacon Thick Cut", "calories": 56  },{"food": "Lettus Heart", "calories": 5  } ]
   }
 
   
@@ -18,11 +19,22 @@ class App extends Component {
     }
   }
 
-   getToalCalories = (activeFoodList) => {
+  changeActiveFoodItem = (item, change ) => {
+    if(change){
+
+    }else{
+      const result = this.state.activeFoodList.filter( (obj) => obj.food !== "Chicken brest" )
+      console.log(result);
+    }
+  
+  }
+
+   getToalCalories = () => {
     let total = 0;
-    activeFoodList.forEach(element => {
+    this.state.activeFoodList.forEach(element => {
       total =  total +element.calories
     });
+    this.changeActiveFoodItem("item" , false)
 
     this.setState({totalCalories: total}) 
   }
@@ -39,7 +51,7 @@ class App extends Component {
       <div className="App">
         {foodList.map(food => <FoodItem food={food.food} calories={food.calories} testProp={this.handleChange}/> )}
         <div> TEST VALUE = {this.state.totalCalories} </div>
-        <button onClick={() => this.getToalCalories(activeFoodList)}> BLarg  </button>
+        <button onClick={() => this.getToalCalories()}> BLarg  </button>
       </div>
     );
   }
