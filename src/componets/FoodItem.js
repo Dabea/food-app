@@ -31,6 +31,9 @@ class FoodItem extends React.Component{
          sendTotalCalories = () => {
             this.setState({active: !this.state.active})
             this.props.testProp(this.state.totalCalories, this.state.active)
+            console.log(this.state.active)
+            this.props.activatefood(this.props.food1)
+
          }
     
     
@@ -38,7 +41,7 @@ class FoodItem extends React.Component{
     render(){
         return(
             <div>
-                <input onClick={() => this.sendTotalCalories() } type="checkbox" />
+                <input checked={this.state.active} onClick={() => this.sendTotalCalories() } type="checkbox" />
                 <label> { this.props.food } </label>
                 <label> {this.props.calories} </label>
                 <span> Quanity 

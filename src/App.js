@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   state = {
     totalCalories: 0,
-    activeFoodList: [{"food": "Chicken brest", "calories": 250  }, {"food": "Bacon Thick Cut", "calories": 56  },{"food": "Lettus Heart", "calories": 5  } ]
+    activeFoodList: []
   }
 
   
@@ -20,11 +20,14 @@ class App extends Component {
   }
 
   changeActiveFoodItem = (item, change ) => {
-    if(change){
+    const result = this.state.activeFoodList.filter( (obj) => obj.food === item.food )
+    console.log(result);
 
+    if(result.length === 0){
+      this.setState({activeFoodList: [...this.state.activeFoodList, item] })
     }else{
-      const result = this.state.activeFoodList.filter( (obj) => obj.food !== "Chicken brest" )
-      console.log(result);
+      const result = this.state.activeFoodList.filter( (obj) => obj.food !== item.food )
+      this.setState({activeFoodList: result})
     }
   
   }
@@ -34,7 +37,7 @@ class App extends Component {
     this.state.activeFoodList.forEach(element => {
       total =  total +element.calories
     });
-    this.changeActiveFoodItem("item" , false)
+   
 
     this.setState({totalCalories: total}) 
   }
@@ -49,9 +52,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        {foodList.map(food => <FoodItem food={food.food} calories={food.calories} testProp={this.handleChange}/> )}
+        {foodList.map(food => <FoodItem food={food.food} food1={food}  calories={food.calories} testProp={this.handleChange} activatefood={this.changeActiveFoodItem} /> )}
         <div> TEST VALUE = {this.state.totalCalories} </div>
         <button onClick={() => this.getToalCalories()}> BLarg  </button>
+
+          {this.state.activeFoodList.length}
       </div>
     );
   }
