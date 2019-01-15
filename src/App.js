@@ -35,7 +35,8 @@ class App extends Component {
    getToalCalories = () => {
     let total = 0;
     this.state.activeFoodList.forEach(element => {
-      total =  total +element.calories
+      let addNewCalories = (element.calories * element.quanity / element.peopleShareing)
+      total =  total + addNewCalories
     });
    
 

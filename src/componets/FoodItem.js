@@ -1,4 +1,5 @@
 import React from "react";
+import './foodItemStyle.css';
 
 class FoodItem extends React.Component{
    
@@ -40,21 +41,22 @@ class FoodItem extends React.Component{
 
     render(){
         return(
-            <div>
-                <input checked={this.state.active} onClick={() => this.sendTotalCalories() } type="checkbox" />
-                <label> { this.props.food } </label>
+            <div class="food-item-row ">
+                <input class="checkbox" checked={this.state.active} onClick={() => this.sendTotalCalories() } type="checkbox" />
+                <label> { this.props.food.food } </label>
                 <label> {this.props.calories} </label>
-                <span> Quanity 
-                    <button class="subBtn" onClick={() =>  this.state.quanity > 0 ? this.decreaseValue("quanity") :false } > - </button>
+                <span class="food-item-spacer" > Quanity 
+                    <button class="subBtn food-item-button" onClick={() =>  this.state.quanity > 0 ? this.decreaseValue("quanity") :false } > - </button>
                      <input size="2" name="quanity" onChange={ this.handleChange}  value={this.state.quanity} />   
-                     <button class="addBtn" onClick={() => this.increaseValue("quanity")} > + </button>  
+                     <button class="addBtn food-item-button " onClick={() => this.increaseValue("quanity")} > + </button>  
                 </span>
-                <span> People  
-                    <button class="subBtn" onClick={() => this.state.peopleShareing > 1 ?  this.decreaseValue("peopleShareing"): false } > - </button> 
+                <span class="food-item-spacer" > People  
+                    <button class="subBtn food-item-button" onClick={() => this.state.peopleShareing > 1 ?  this.decreaseValue("peopleShareing"): false } > - </button> 
                     <input size="2" name="peopleShareing"  onChange={ this.handleChange} value={this.state.peopleShareing} />  
-                    <button class="addbtn" onClick={() => this.increaseValue("peopleShareing")}  > + </button>  
+                    <button class="addBtn food-item-button" onClick={() => this.increaseValue("peopleShareing")}  > + </button>  
                 </span>
                 <label> Total: {this.state.totalCalories} </label>
+               
             </div>
         );
     }
